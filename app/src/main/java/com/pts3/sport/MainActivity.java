@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +19,8 @@ import android.widget.Toast;
 import com.pts3.sport.database.ProfesseurManager;
 import com.pts3.sport.network.NetworkSyncData;
 
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity{
     private Button btn;
 
     private Toast toast;
+
+    MenuItem testMenu,testMenu2;
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +84,20 @@ public class MainActivity extends AppCompatActivity{
         {
             Log.e("checkInternet","Pas de connexion");
         }
+        new Timer().scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run(){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        onPrepareOptionsMenu(menu);
+                    }
+                });
+
+
+            }
+        },1000,1000);
+
     }
 
     public void ouvrirAccueil(){
@@ -98,5 +118,35 @@ public class MainActivity extends AppCompatActivity{
         // Le périphérique est connecté à Internet
         return true;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //ajoute les entrées de menu_test à l'ActionBar
+        getMenuInflater().inflate(R.menu.menu_voyant, menu);
+        testMenu =menu.findItem(R.id.action_save);
+        testMenu2 = menu.findItem(R.id.button);
+
+
+        return true;
+
+
+    }
+    @Override
+    public boolean onPrepareOptionsMenu (Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        if (haveInternetConnection()) {
+            testMenu.setVisible(true);
+            testMenu2.setVisible(false);
+        } else  {
+            testMenu.setVisible(true);
+            testMenu2.setVisible(false);
+            testMenu.setVisible(false);
+            testMenu2.setVisible(true);
+        }
+
+        return true;
+    }
+
 
 }

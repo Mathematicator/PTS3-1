@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BDDtest.iml" filepath="$PROJECT_DIR$/BDDtest.iml" />
+      <module fileurl="file://C:\Users\Guillaume\Documents\GitHub\test2\BDDtest.iml" filepath="C:\Users\Guillaume\Documents\GitHub\test2\BDDtest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Guillaume\Documents\GitHub\test2\app\app.iml" filepath="C:\Users\Guillaume\Documents\GitHub\test2\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test2.iml" filepath="$PROJECT_DIR$/test2.iml" />
     </modules>
   </component>
 </project>
