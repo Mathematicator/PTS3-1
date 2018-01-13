@@ -38,8 +38,10 @@
         <activity
             android:name=".EvalActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".ChronoActivity"
+        <activity
+            android:name=".ChronoActivity"
             android:screenOrientation="landscape" />
+        <activity android:name=".ChronoActivity2"></activity>
     </application>
 
 </manifest>
