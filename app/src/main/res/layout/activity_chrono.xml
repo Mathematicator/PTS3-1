@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.pts3.sport.ChronoActivity"
+android:orientation="vertical">
+
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TableRow
+        android:id="@+id/numero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/nomEleve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nom de l'élève"
+            android:layout_weight="0.33"
+            />
+        <TextView
+            android:id="@+id/temps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Temps de l'élève"
+            android:layout_weight="0.33"
+            />
+        <TextView
+            android:id="@+id/tempsCores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Temps à faire correspondre à l'élève"
+            android:layout_weight="0.33"
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/table2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/eleve1"
+            android:layout_width="match_parent"
+            android:text="ELeve_1"
+            android:layout_weight="0.33"
+            />
+
+        <TextView
+            android:id="@+id/temps1"
+            android:layout_width="match_parent"
+            android:layout_weight="0.33"
+            />
+
+        <EditText
+            android:id="@+id/txtInput"
+            android:inputType="number"
+            android:hint="temps_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/table3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/eleve2"
+            android:layout_width="match_parent"
+            android:text="Eleve_2"
+            android:layout_weight="0.33"
+            />
+
+        <TextView
+            android:id="@+id/temps2"
+            android:layout_width="match_parent"
+            android:layout_weight="0.33"
+            />
+
+        <EditText
+            android:id="@+id/txtInput2"
+            android:inputType="number"
+            android:hint="temps_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/table4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/eleve3"
+            android:layout_width="match_parent"
+            android:text="Eleve_3"
+            android:layout_weight="0.33"
+            />
+
+        <TextView
+            android:id="@+id/temps3"
+            android:layout_width="match_parent"
+            android:layout_weight="0.33"
+            />
+
+        <EditText
+            android:id="@+id/txtInput3"
+            android:inputType="number"
+            android:hint="temps_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            />
+    </TableRow>
+    <TableRow
+        android:id="@+id/table5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/eleve4"
+            android:layout_width="match_parent"
+            android:text="Eleve_4"
+            android:layout_weight="0.33"
+            />
+
+        <TextView
+            android:id="@+id/temps4"
+            android:layout_width="match_parent"
+            android:layout_weight="0.33"
+            />
+
+        <EditText
+            android:id="@+id/txtInput4"
+            android:inputType="number"
+            android:hint="temps_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            />
+    </TableRow>
+
+</TableLayout>
+
+
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Button
+        android:layout_marginTop="25dp"
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.33"
+        android:text="start"
+        />
+
+    <Button
+        android:layout_marginTop="25dp"
+        android:id="@+id/buttonLap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.33"
+        android:text="lap"
+        />
+</LinearLayout>
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Button
+        android:layout_marginTop="25dp"
+        android:id="@+id/btnValider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valider"
+        android:layout_weight="0.33"
+        />
+
+    <Button
+        android:layout_marginTop="25dp"
+        android:id="@+id/btnStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stop"
+        android:layout_weight="0.33"
+        />
+    <Button
+        android:id="@+id/btnSuivant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.33"
+        android:text="suivant"
+        />
+
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/txtValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/txtAffi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+</LinearLayout>
+
+</LinearLayout>
+
