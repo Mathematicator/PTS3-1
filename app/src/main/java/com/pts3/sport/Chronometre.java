@@ -63,4 +63,11 @@ public class Chronometre {
         ChronoActivity.txtAffichage.setText(ChronoActivity.txtAffichage.getText() + "\n" +i+"-"+ChronoActivity.txtValue.getText());
         i++;
     }
+
+    public void restart() {
+        startime = 0L; timeMillisecond = 0L; timeSwapBuff = 0L; updateTime = 0L;
+        ChronoActivity.txtValue.setText("00:00:000");
+        ChronoActivity.txtAffichage.setText("");
+        i=1;
+    }
 }

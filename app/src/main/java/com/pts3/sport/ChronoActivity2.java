@@ -2,7 +2,6 @@ package com.pts3.sport;
 
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -11,18 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.pts3.sport.dao.Eleve;
 import com.pts3.sport.database.ClasseManager;
 import com.pts3.sport.database.EleveManager;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,13 +32,13 @@ public class ChronoActivity2 extends AppCompatActivity {
     public static TextView txtAffichage;
     public Button start, lap, stop, valider, suivant;
 
-    private ArrayList<TextView> textViewList, textViews2List,besTimeList;
+    private ArrayList<TextView> textViewList, textViews2List,besTimeList,noteTVList;
    private ArrayList<EditText> editTextList;
 
     private ArrayList<String> listTemps1;
-    TextView temps1, temps2, temps3, temps4, eleve1, eleve2, eleve3, eleve4,meilleurT1,meilleurT2,meilleurT3,meilleurT4;
-    EditText txtInput1, txtInput2, txtInput3, txtInput4;
-    int iterator, iterator2;
+    private   TextView temps1, temps2, temps3, temps4, eleve1, eleve2, eleve3, eleve4,meilleurT1,meilleurT2,meilleurT3,meilleurT4,note1,note2,note3,note4;
+    private    EditText txtInput1, txtInput2, txtInput3, txtInput4;
+    private int iterator, iterator2,compteur;
     private Chronometre2 chrono2;
     private SharedPreferences preferences;
     private String classe;
@@ -68,13 +63,14 @@ public class ChronoActivity2 extends AppCompatActivity {
         stop =  findViewById(R.id.btnStop);
         valider =  findViewById(R.id.btnValider);
         Intent intent = getIntent();
-        iterator = intent.getIntExtra(ITERATOR_VALUE, 0);
+
         chrono2 = new Chronometre2(this, new Handler());
         listTemps1 = new ArrayList<>();
         listTemps1 = intent.getStringArrayListExtra(LIST_TIME_VALUE);
         besTimeList = new ArrayList<>();
         textViewList = new ArrayList<>();
         editTextList = new ArrayList<>();
+        noteTVList = new ArrayList<>();
         meilleurT1 = findViewById(R.id.meilleurTemps1);
         meilleurT2 = findViewById(R.id.meilleurTemps2);
         meilleurT3 = findViewById(R.id.meilleurTemps3);
@@ -83,8 +79,14 @@ public class ChronoActivity2 extends AppCompatActivity {
         besTimeList.add(meilleurT2);
         besTimeList.add(meilleurT3);
         besTimeList.add(meilleurT4);
-
-
+        note1 = findViewById(R.id.note1);
+        note2 = findViewById(R.id.note2);
+        note3 = findViewById(R.id.note3);
+        note4 = findViewById(R.id.note4);
+        noteTVList.add(note1);
+        noteTVList.add(note2);
+        noteTVList.add(note3);
+        noteTVList.add(note4);
 
         txtInput1 = findViewById(R.id.txtInput);
         txtInput2 = findViewById(R.id.txtInput2);
@@ -121,11 +123,11 @@ public class ChronoActivity2 extends AppCompatActivity {
 
         for (Eleve eleve : listEleve) {
 
-            if (iterator <= iterator2 && iterator2 < iterator + 4) {
+            if (!eleve.isEvalue()) {
 
 
                 textViews2List.get(iterator2 % 4).setText(eleve.getNom());
-
+                eleve.setBoolean(true);
             }
             iterator2++;
         }
@@ -168,44 +170,151 @@ public class ChronoActivity2 extends AppCompatActivity {
                     int j = 0;
                     for (EditText eT : editTextList) {
 
-                        if (String.valueOf(eT.getText()).equals("" + i)) {
-                            Log.i("numéro", String.valueOf(eT.getText()));
-                            textViewList.get(j).setText(getTextOnLine);
-                            String[] time1 = getTextOnLine.split("-");
-                            time1[1]="00:"+time1[1];
-                            String[]  time2 = listTemps1.get(j).split("-");
-                            time2[1]="00:"+time2[1];
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
-                            try {
-                                Date temps1 = simpleDateFormat.parse(time1[1]);
-                                Date temps2 = simpleDateFormat.parse(time2[1]);
-                                if( temps1.getTime() < temps2.getTime()){
-                                    besTimeList.get(j).setText(time1[1]);
-                                }else{
-                                    besTimeList.get(j).setText(time2[1]);
+                            if (String.valueOf(eT.getText()).equals("" + i)) {
+                                if (compteur > 0) {
+
+                                    Log.i("numéro", String.valueOf(eT.getText()));
+
+                                    String[] time1 = getTextOnLine.split("-");
+                                    time1[1] = "00:" + time1[1];
+                                    String[] time2 = ((String) besTimeList.get(j).getText()).split("-");
+                                    time2[1] = "00:" + time2[1];
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
+                                    try {
+                                        Date temps1 = simpleDateFormat.parse(time1[1]);
+                                        Date temps2 = simpleDateFormat.parse(time2[1]);
+                                        if (temps1.getTime() < temps2.getTime()) {
+                                            besTimeList.get(j).setText(getTextOnLine);
+                                        }
+
+
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    double points1 = getPoint(listTemps1.get(j));
+                                    double points2 =  getPointWithDifferenceBetweenTime(listTemps1.get(j),(String) besTimeList.get(j).getText());
+                                    double points = points1+ points2;
+                                    noteTVList.get(j).setText(""+ points);
+                                } else {
+                                    besTimeList.get(j).setText(getTextOnLine);
                                 }
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                                textViewList.get(j).setText(getTextOnLine);
+
+
                             }
 
-                        }
                         j++;
                     }
 
-                }
 
+
+
+                }
+                compteur=1;
             }
         });
         suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ChronoActivity2.this, ChronoActivity.class);
-                intent.putExtra(ITERATOR_VALUE, iterator + 4);
-                startActivity(intent);
+                for(Eleve eleve : listEleve) {
+                    if(!eleve.isEvalue()) {
+                        Intent intent = new Intent(ChronoActivity2.this, ChronoActivity.class);
 
+                        startActivity(intent);
+                    }
+                }
+                Intent intent = new Intent(ChronoActivity2.this, SelectionEleve.class);
+
+                startActivity(intent);
 
             }
         });
 
+    }
+
+    private double getPointWithDifferenceBetweenTime(String s, String s1) {
+        String[] time1 = s.split("-");
+        time1[1] = "00:" + time1[1];
+        String[] time2 = s.split("-");
+        time2[1] = "00:" + time2[1];
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
+        try {
+            //TEMPS PLATS
+            Date temps = simpleDateFormat.parse(time1[1]);
+            //TEMPS HAIES
+            Date temps1 = simpleDateFormat.parse(time2[1]);
+            if(temps1.getTime()-temps.getTime() > 2.6){
+                return 0;
+
+            }else if(temps1.getTime()-temps.getTime() <= 2.6 && temps1.getTime()-temps.getTime() > 2.3 ){
+                return 0.5;
+
+            }
+            else if(temps1.getTime()-temps.getTime() <= 2.3 && temps1.getTime()-temps.getTime() > 2){
+                return 1;
+
+            }
+            else if(temps1.getTime()-temps.getTime() <= 2 && temps1.getTime()-temps.getTime() > 1.7 ){
+                return 1.5;
+
+            }
+            else if(temps1.getTime()-temps.getTime() <= 1.7 && temps1.getTime()-temps.getTime() > 1.4 ){
+                return 2;
+
+            }else if(temps1.getTime()-temps.getTime() <= 1.4 && temps1.getTime()-temps.getTime() > 1.1 ){
+                return 2.5;
+
+            }else if(temps1.getTime()-temps.getTime() <1.1 ){
+                return 3;
+
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return 0;
+    }
+
+    private double getPoint(String s) {
+        String[] time1 = s.split("-");
+        time1[1] = "00:" + time1[1];
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
+        try {
+            Date temps = simpleDateFormat.parse(time1[1]);
+
+            if(temps.getTime() > 7.5){
+                return 0;
+            }else if(temps.getTime() <=7.5 && temps.getTime() > 7.2){
+                return 0.5;
+            }
+            else if(temps.getTime() <=7.2 && temps.getTime() > 6.9){
+                return 1;
+            }
+            else if(temps.getTime() <=6.9 && temps.getTime() > 6.6){
+                return 1.5;
+            }
+            else if(temps.getTime() <=6.6 && temps.getTime() > 6.3){
+                return 2;
+            }else if(temps.getTime() <=6.3 && temps.getTime() > 6){
+                return 2.5;
+            }
+            else if(temps.getTime() <=6 ){
+                return 3;
+            }
+
+
+
+
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return 0;
     }
 }

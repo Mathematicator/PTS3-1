@@ -64,13 +64,13 @@
                 android:id="@+id/eleve1"
                 android:layout_width="match_parent"
                 android:text="ELeve_1"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
 
             <TextView
                 android:id="@+id/temps1"
                 android:layout_width="match_parent"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
 
             <EditText
@@ -79,7 +79,7 @@
                 android:hint="temps_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/meilleurTemps1"
@@ -106,13 +106,13 @@
                 android:id="@+id/eleve2"
                 android:layout_width="match_parent"
                 android:text="Eleve_2"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
 
             <TextView
                 android:id="@+id/temps2"
                 android:layout_width="match_parent"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
 
             <EditText
@@ -121,7 +121,7 @@
                 android:hint="temps_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/meilleurTemps2"
@@ -147,13 +147,13 @@
                 android:id="@+id/eleve3"
                 android:layout_width="match_parent"
                 android:text="Eleve_3"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
 
             <TextView
                 android:id="@+id/temps3"
                 android:layout_width="match_parent"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
 
             <EditText
@@ -162,7 +162,7 @@
                 android:hint="temps_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/meilleurTemps3"
@@ -187,13 +187,13 @@
                 android:id="@+id/eleve4"
                 android:layout_width="match_parent"
                 android:text="Eleve_4"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
 
             <TextView
                 android:id="@+id/temps4"
                 android:layout_width="match_parent"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
 
             <EditText
@@ -202,7 +202,7 @@
                 android:hint="temps_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.33"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/meilleurTemps4"
@@ -231,7 +231,7 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             android:text="start"
             />
 
@@ -240,7 +240,7 @@
             android:id="@+id/buttonLap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             android:text="lap"
             />
     </LinearLayout>
@@ -255,7 +255,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Valider"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
 
         <Button
@@ -264,7 +264,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="stop"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
 
         <Button
@@ -272,7 +272,7 @@
             android:id="@+id/btnSuivant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             android:text="suivant" />
 
 

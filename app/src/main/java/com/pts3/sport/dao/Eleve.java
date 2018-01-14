@@ -11,6 +11,7 @@ public class Eleve {
     private String prenom_eleve;
     private int sexe;
     private int id_classe;
+    private boolean isEvalué=false;
 
     public Eleve(int id_eleve,String nom_eleve, String prenom_eleve, int sexe, int id_classe) {
         this.id_eleve = id_eleve;
@@ -32,6 +33,12 @@ public class Eleve {
         return sexe;
     }
 
+    public boolean isEvalue(){
+        return isEvalué;
+    }
+    public void setBoolean(Boolean b){
+        this.isEvalué=b;
+    }
 
 
     public int getId_eleve() {

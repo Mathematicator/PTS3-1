@@ -22,21 +22,27 @@ android:orientation="vertical">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nom de l'élève"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
         <TextView
             android:id="@+id/temps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Temps de l'élève"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Meilleur temps" />
+
         <TextView
             android:id="@+id/tempsCores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Temps à faire correspondre à l'élève"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
     </TableRow>
 
@@ -49,14 +55,14 @@ android:orientation="vertical">
         <TextView
             android:id="@+id/eleve1"
             android:layout_width="match_parent"
-            android:text="ELeve_1"
-            android:layout_weight="0.33"
+
+            android:layout_weight="1"
             />
 
         <TextView
             android:id="@+id/temps1"
             android:layout_width="match_parent"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
 
         <EditText
@@ -65,7 +71,13 @@ android:orientation="vertical">
             android:hint="temps_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/meilleurTemps1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             />
     </TableRow>
 
@@ -78,14 +90,14 @@ android:orientation="vertical">
         <TextView
             android:id="@+id/eleve2"
             android:layout_width="match_parent"
-            android:text="Eleve_2"
-            android:layout_weight="0.33"
+
+            android:layout_weight="1"
             />
 
         <TextView
             android:id="@+id/temps2"
             android:layout_width="match_parent"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
 
         <EditText
@@ -94,7 +106,13 @@ android:orientation="vertical">
             android:hint="temps_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/meilleurTemps2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             />
     </TableRow>
 
@@ -107,14 +125,14 @@ android:orientation="vertical">
         <TextView
             android:id="@+id/eleve3"
             android:layout_width="match_parent"
-            android:text="Eleve_3"
-            android:layout_weight="0.33"
+
+            android:layout_weight="1"
             />
 
         <TextView
             android:id="@+id/temps3"
             android:layout_width="match_parent"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
 
         <EditText
@@ -123,7 +141,13 @@ android:orientation="vertical">
             android:hint="temps_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/meilleurTemps3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             />
     </TableRow>
     <TableRow
@@ -135,14 +159,15 @@ android:orientation="vertical">
         <TextView
             android:id="@+id/eleve4"
             android:layout_width="match_parent"
-            android:text="Eleve_4"
-            android:layout_weight="0.33"
+
+
+            android:layout_weight="1"
             />
 
         <TextView
             android:id="@+id/temps4"
             android:layout_width="match_parent"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
 
         <EditText
@@ -151,7 +176,13 @@ android:orientation="vertical">
             android:hint="temps_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/meilleurTemps4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             />
     </TableRow>
 
@@ -204,11 +235,20 @@ android:orientation="vertical">
         android:layout_weight="0.33"
         />
     <Button
+        android:layout_marginTop="25dp"
         android:id="@+id/btnSuivant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.33"
         android:text="suivant"
+        />
+    <Button
+        android:layout_marginTop="25dp"
+        android:id="@+id/btnRestart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.33"
+        android:text="restart"
         />
 
 
