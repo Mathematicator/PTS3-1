@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -29,14 +30,14 @@ public class SelectionEleve extends AppCompatActivity {
     private Context context = this;
     private List<Eleve> listEleve;
     private RadioGroup listView;
-
+    private Button btnEval;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_eleve);
 
-
+        btnEval = findViewById(R.id.btnEval);
         listView = (RadioGroup) findViewById(R.id.RGEleve);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -96,6 +97,13 @@ public class SelectionEleve extends AppCompatActivity {
 
 
         }
+        btnEval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SelectionEleve.this,ChronoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
