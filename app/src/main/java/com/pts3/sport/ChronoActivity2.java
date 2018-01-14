@@ -22,24 +22,29 @@ import com.pts3.sport.dao.Eleve;
 import com.pts3.sport.database.ClasseManager;
 import com.pts3.sport.database.EleveManager;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ChronoActivity2 extends AppCompatActivity {
-
+    private static final String LIST_TIME_VALUE ="c" ;
     private static final String ITERATOR_VALUE = "a";
     public static TextView txtValue;
     public static TextView txtAffichage;
     public Button start, lap, stop, valider, suivant;
 
-    ArrayList<TextView> textViewList, textViews2List;
-    ArrayList<EditText> editTextList;
+    private ArrayList<TextView> textViewList, textViews2List,besTimeList;
+   private ArrayList<EditText> editTextList;
 
-
-    TextView temps1, temps2, temps3, temps4, eleve1, eleve2, eleve3, eleve4;
+    private ArrayList<String> listTemps1;
+    TextView temps1, temps2, temps3, temps4, eleve1, eleve2, eleve3, eleve4,meilleurT1,meilleurT2,meilleurT3,meilleurT4;
     EditText txtInput1, txtInput2, txtInput3, txtInput4;
     int iterator, iterator2;
-    private Chronometre chrono;
+    private Chronometre2 chrono2;
     private SharedPreferences preferences;
     private String classe;
 
@@ -55,20 +60,30 @@ public class ChronoActivity2 extends AppCompatActivity {
         eleve2 = findViewById(R.id.eleve2);
         eleve3 = findViewById(R.id.eleve3);
         eleve4 = findViewById(R.id.eleve4);
-        start = (Button) findViewById(R.id.button);
-        txtAffichage = (TextView) findViewById(R.id.txtAffi2);
-        txtValue = (TextView) findViewById(R.id.txtValue2);
+        start =  findViewById(R.id.button);
+        txtAffichage = findViewById(R.id.txtAffi2);
+        txtValue =  findViewById(R.id.txtValue2);
         suivant = findViewById(R.id.btnSuivant);
-        lap = (Button) findViewById(R.id.buttonLap);
-        stop = (Button) findViewById(R.id.btnStop);
-        valider = (Button) findViewById(R.id.btnValider);
+        lap =  findViewById(R.id.buttonLap);
+        stop =  findViewById(R.id.btnStop);
+        valider =  findViewById(R.id.btnValider);
         Intent intent = getIntent();
         iterator = intent.getIntExtra(ITERATOR_VALUE, 0);
-        chrono = new Chronometre(this, new Handler());
-
-
+        chrono2 = new Chronometre2(this, new Handler());
+        listTemps1 = new ArrayList<>();
+        listTemps1 = intent.getStringArrayListExtra(LIST_TIME_VALUE);
+        besTimeList = new ArrayList<>();
         textViewList = new ArrayList<>();
         editTextList = new ArrayList<>();
+        meilleurT1 = findViewById(R.id.meilleurTemps1);
+        meilleurT2 = findViewById(R.id.meilleurTemps2);
+        meilleurT3 = findViewById(R.id.meilleurTemps3);
+        meilleurT4 = findViewById(R.id.meilleurTemps4);
+        besTimeList.add(meilleurT1);
+        besTimeList.add(meilleurT2);
+        besTimeList.add(meilleurT3);
+        besTimeList.add(meilleurT4);
+
 
 
         txtInput1 = findViewById(R.id.txtInput);
@@ -119,7 +134,7 @@ public class ChronoActivity2 extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chrono.start();
+                chrono2.start();
 
 
             }
@@ -129,7 +144,7 @@ public class ChronoActivity2 extends AppCompatActivity {
         lap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chrono.affTemps();
+                chrono2.affTemps();
 
 
             }
@@ -138,7 +153,7 @@ public class ChronoActivity2 extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chrono.stop();
+                chrono2.stop();
             }
         });
 
@@ -156,6 +171,23 @@ public class ChronoActivity2 extends AppCompatActivity {
                         if (String.valueOf(eT.getText()).equals("" + i)) {
                             Log.i("numéro", String.valueOf(eT.getText()));
                             textViewList.get(j).setText(getTextOnLine);
+                            String[] time1 = getTextOnLine.split("-");
+                            time1[1]="00:"+time1[1];
+                            String[]  time2 = listTemps1.get(j).split("-");
+                            time2[1]="00:"+time2[1];
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
+                            try {
+                                Date temps1 = simpleDateFormat.parse(time1[1]);
+                                Date temps2 = simpleDateFormat.parse(time2[1]);
+                                if( temps1.getTime() < temps2.getTime()){
+                                    besTimeList.get(j).setText(time1[1]);
+                                }else{
+                                    besTimeList.get(j).setText(time2[1]);
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
                         }
                         j++;
                     }

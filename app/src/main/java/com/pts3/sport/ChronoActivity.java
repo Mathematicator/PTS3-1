@@ -1,41 +1,39 @@
 package com.pts3.sport;
 
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.content.SharedPreferences;
-        import android.os.Handler;
-        import android.preference.PreferenceManager;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.RadioGroup;
-        import android.widget.TableRow;
-        import android.widget.TextView;
+import com.pts3.sport.dao.Eleve;
+import com.pts3.sport.database.ClasseManager;
+import com.pts3.sport.database.EleveManager;
 
-        import com.pts3.sport.dao.Eleve;
-        import com.pts3.sport.database.ClasseManager;
-        import com.pts3.sport.database.EleveManager;
-
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChronoActivity extends AppCompatActivity {
 
     private static final String ITERATOR_VALUE = "a";
+
+    private static final String LIST_TIME_VALUE ="c" ;
+    //Attributs static à changer
     public static TextView txtValue;
     public static TextView txtAffichage;
     public Button start, lap, stop, valider,suivant;
+    private ArrayList<String> listTemps1;
+    private ArrayList<TextView> textViewList,textViews2List;
+    private ArrayList<EditText> editTextList;
 
-    ArrayList<TextView> textViewList,textViews2List;
-    ArrayList<EditText> editTextList;
-
-
+    private SharedPreferences.Editor editor;
     TextView temps1,temps2,temps3,temps4,eleve1,eleve2,eleve3,eleve4;
     EditText txtInput1,txtInput2,txtInput3,txtInput4;
     int iterator,iterator2;
@@ -58,21 +56,21 @@ public class ChronoActivity extends AppCompatActivity {
         eleve2 = findViewById(R.id.eleve2);
         eleve3 = findViewById(R.id.eleve3);
         eleve4 = findViewById(R.id.eleve4);
-        start = (Button) findViewById(R.id.button);
-        txtAffichage = (TextView) findViewById(R.id.txtAffi);
-        txtValue = (TextView) findViewById(R.id.txtValue);
+        start = findViewById(R.id.button);
+        txtAffichage =  findViewById(R.id.txtAffi);
+        txtValue =  findViewById(R.id.txtValue);
         suivant=findViewById(R.id.btnSuivant);
-        lap = (Button) findViewById(R.id.buttonLap);
-        stop = (Button)findViewById(R.id.btnStop);
-        valider = (Button)findViewById(R.id.btnValider);
+        lap =  findViewById(R.id.buttonLap);
+        stop = findViewById(R.id.btnStop);
+        valider = findViewById(R.id.btnValider);
         Intent intent=getIntent();
         iterator = intent.getIntExtra(ITERATOR_VALUE,0);
         chrono = new Chronometre(this, new Handler());
-        String[] nom = {"Théo", "Marceau", "Guillaume","Test"}; //mettre les eleves a noter (classe)
+
 
         textViewList = new ArrayList<>();
         editTextList = new ArrayList<>();
-
+        listTemps1 = new ArrayList<>();
 
         txtInput1 =  findViewById(R.id.txtInput);
         txtInput2 =  findViewById(R.id.txtInput2);
@@ -172,8 +170,15 @@ public class ChronoActivity extends AppCompatActivity {
         suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for(TextView tv : textViewList){
+                    listTemps1.add((String) tv.getText());
+                }
                 Intent intent = new Intent(ChronoActivity.this,ChronoActivity2.class);
-                  intent.putExtra(ITERATOR_VALUE,iterator);
+
+
+                    intent.putStringArrayListExtra(LIST_TIME_VALUE,listTemps1);
+
+                intent.putExtra(ITERATOR_VALUE,iterator);
                 startActivity(intent);
 
 
