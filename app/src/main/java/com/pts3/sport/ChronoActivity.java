@@ -230,7 +230,7 @@ public class ChronoActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(ChronoActivity.this,ChronoActivity2.class);
                 intent.putStringArrayListExtra(LIST_TIME_VALUE,listTemps1);
-                
+
                 startActivity(intent);
 
 
