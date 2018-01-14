@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.pts3.sport.activity.StepperActivity;
 import com.pts3.sport.database.ProfesseurManager;
 import com.pts3.sport.network.NetworkSyncData;
 
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void ouvrirAccueil(){
-        Intent displayActivity = new Intent(this,ChoixActivity.class);
+        Intent displayActivity = new Intent(this,StepperActivity.class);
         this.startActivity(displayActivity);
     }
 
@@ -123,9 +125,8 @@ public class MainActivity extends AppCompatActivity{
     public boolean onCreateOptionsMenu(Menu menu) {
         //ajoute les entrées de menu_test à l'ActionBar
         getMenuInflater().inflate(R.menu.menu_voyant, menu);
-        testMenu =menu.findItem(R.id.action_save);
-        testMenu2 = menu.findItem(R.id.button);
-
+        testMenu = menu.findItem(R.id.internet);
+        testMenu2 = menu.findItem(R.id.no_internet);
 
         return true;
 
@@ -139,14 +140,12 @@ public class MainActivity extends AppCompatActivity{
             testMenu.setVisible(true);
             testMenu2.setVisible(false);
         } else  {
-            testMenu.setVisible(true);
-            testMenu2.setVisible(false);
+
             testMenu.setVisible(false);
             testMenu2.setVisible(true);
         }
 
         return true;
     }
-
 
 }

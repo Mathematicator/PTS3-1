@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/check"
-    android:buttonTint="#0b910e"
+    android:buttonTint="#3498db"
     android:textSize="16dp"
     >
 
