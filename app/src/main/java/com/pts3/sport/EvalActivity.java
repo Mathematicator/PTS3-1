@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -70,7 +71,14 @@ public class EvalActivity extends AppCompatActivity {
         btnSave = (Button) findViewById(R.id.btnSaveNote);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         noteGlobale = (TextView) findViewById(R.id.note);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         noteGlobale.setText("0");
+
+        CustomAdapter.notesDetails = "{\"apprendre\":[null,null,null,null,null,null],\"approprier\":[null,null,null,null,null,null],\"methode\":[null,null,null,null,null,null],\"motricite\":[null,null,null,null,null,null],\"regle\":[null,null,null,null,null,null]}";
+
 
 
         final SportManager sportManager = new SportManager(this);
@@ -217,7 +225,7 @@ public class EvalActivity extends AppCompatActivity {
             listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         }
 
-        noteGlobale.setText(Double.toString(CustomAdapter.noteTotal));
+        noteGlobale.setText(Double.toString(CustomAdapter.getNoteTotal()));
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,221 +268,6 @@ public class EvalActivity extends AppCompatActivity {
         });
         //arrayAdapter.notifyDataSetChanged();
 
-
-
-
-        //Log.d("sportid", "size "+listeCriteres.size());
-
-        /*for (Criteres c : listeCriteres) {
-            numTest++;
-
-            switch (numTest) {
-                case 1 :
-                    linear1= (LinearLayout) findViewById(R.id.linearMotricite);
-                    break;
-                case 2 :
-                    linear1= (LinearLayout) findViewById(R.id.linearMéthodes);
-                    break;
-                case 3 :
-                    linear1= (LinearLayout) findViewById(R.id.linearRegles);
-                    break;
-                case 4 :
-                    linear1= (LinearLayout) findViewById(R.id.linearApprendre);
-                    break;
-                case 5 :
-                    linear1= (LinearLayout) findViewById(R.id.linearApproprier);
-
-            }
-
-            if (!c.getChoix1().equals("null")) {
-                final CheckBox check1 = new CheckBox(this);
-                check1.setText(c.getChoix1());
-
-                check1.setCameraDistance(c.getPoint1());
-                check1.setTextColor(Color.GRAY);
-                check1.setTextSize(20);
-                linear1.addView(check1);
-                check1.setOnClickListener(new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onClick(View v) {
-                        resultat=Float.parseFloat(text.getText().toString());
-
-                        if (check1.isChecked()) {
-
-                            resultat = resultat + check1.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                        else {
-                            resultat = resultat-check1.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                    }
-                });
-            }
-
-            if (!c.getChoix2().equals("null")) {
-                final CheckBox check2 = new CheckBox(this);
-                check2.setText(c.getChoix2());
-                check2.setCameraDistance(c.getPoint2());
-                check2.setTextColor(Color.GRAY);
-                check2.setTextSize(20);
-                linear1.addView(check2);
-                check2.setOnClickListener(new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onClick(View v) {
-                        resultat=Float.parseFloat(text.getText().toString());
-
-                        if (check2.isChecked()) {
-
-                            resultat = resultat + check2.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                        else {
-                            resultat = resultat-check2.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                    }
-                });
-            }
-
-            if (!c.getChoix3().equals("null")) {
-                final CheckBox check3 = new CheckBox(this);
-                check3.setText(c.getChoix3());
-                check3.setCameraDistance(c.getPoint3());
-                check3.setTextSize(20);
-                check3.setTextColor(Color.GRAY);
-                linear1.addView(check3);
-                check3.setOnClickListener(new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onClick(View v) {
-                        resultat=Float.parseFloat(text.getText().toString());
-
-                        if (check3.isChecked()) {
-
-                            resultat = resultat + check3.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                        else {
-                            resultat = resultat-check3.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                    }
-                });
-            }
-
-            if (!c.getChoix4().equals("null")) {
-                final CheckBox check4 = new CheckBox(this);
-                Log.e("cget",""+c.getChoix4());
-                check4.setText(c.getChoix4());
-                check4.setCameraDistance(c.getPoint4());
-                check4.setTextColor(Color.GRAY);
-                check4.setTextSize(20);
-                linear1.addView(check4);
-                check4.setOnClickListener(new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onClick(View v) {
-                        resultat=Float.parseFloat(text.getText().toString());
-
-                        if (check4.isChecked()) {
-
-                            resultat = resultat + check4.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                        else {
-                            resultat = resultat-check4.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                    }
-                });
-            }
-
-            if (!c.getChoix5().equals("null")) {
-                final CheckBox check5 = new CheckBox(this);
-
-                check5.setText(c.getChoix5());
-                check5.setCameraDistance(c.getPoint5());
-                check5.setTextColor(Color.GRAY);
-                check5.setTextSize(20);
-                linear1.addView(check5);
-                check5.setOnClickListener(new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onClick(View v) {
-                        resultat=Float.parseFloat(text.getText().toString());
-
-                        if (check5.isChecked()) {
-
-                            resultat = resultat + check5.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                        else {
-                            resultat = resultat-check5.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                    }
-                });
-            }
-
-            if (!c.getChoix6().equals("null")) {
-                final CheckBox check6 = new CheckBox(this);
-                check6.setText(c.getChoix6());
-                check6.setTextSize(20);
-                check6.setCameraDistance(c.getPoint6());
-                check6.setTextColor(Color.GRAY);
-                linear1.addView(check6);
-                check6.setOnClickListener(new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onClick(View v) {
-                        resultat=Float.parseFloat(text.getText().toString());
-
-                        if (check6.isChecked()) {
-
-                            resultat = resultat + check6.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                        else {
-                            resultat = resultat-check6.getCameraDistance();
-                            text.setText(Float.toString(resultat));
-                        }
-                    }
-                });
-            }
-
-        }
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                NoteManager noteManager = new NoteManager(context);
-                Note note = new Note(preferences.getInt("eleve",1),1);
-                note.setApprendre(Float.parseFloat(text.getText().toString()));
-                note.setNote(1);
-                note.setApproprier(0);
-                note.setMethodes(0);
-                note.setMotricite(0);
-                note.setPerformances(0);
-                note.setRegles(0);
-                noteManager.ajouter(note);
-
-                registerReceiver(new NetworkSyncData(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-                Toast toast;
-                toast = Toast.makeText(context, "Note sauvegardée !", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-            */
     }
 
 

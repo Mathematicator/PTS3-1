@@ -9,4 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ></ListView>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chronoButton"
+        android:layout_margin="11dp"
+        android:src="@drawable/chrono"
+        android:clickable="true"
+        app:backgroundTint="#84c4ef"
+        app:fabSize="normal"
+        app:layout_anchor="@id/listViewer"
+        app:layout_anchorGravity="bottom|right|end">
+    </android.support.design.widget.FloatingActionButton>
 </android.support.design.widget.CoordinatorLayout>

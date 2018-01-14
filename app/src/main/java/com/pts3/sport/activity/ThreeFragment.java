@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -21,8 +22,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.pts3.sport.ChronoActivity;
 import com.pts3.sport.EvalActivity;
 import com.pts3.sport.R;
+import com.pts3.sport.SelectionEleve;
 import com.pts3.sport.adaptater.EtudiantAdapter;
 import com.pts3.sport.dao.Eleve;
 import com.pts3.sport.dao.Note;
@@ -56,11 +59,23 @@ public class ThreeFragment extends Fragment implements Step {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_listview, container, false);
+        View v = inflater.inflate(R.layout.fragment_etudiant_listview, container, false);
         listView = (ListView)v.findViewById(R.id.listViewer);
+
+        FloatingActionButton chronoButton = (FloatingActionButton)v.findViewById(R.id.chronoButton);
         context = this.getContext();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         editor = preferences.edit();
+
+        chronoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context,ChronoActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return v;
     }
 

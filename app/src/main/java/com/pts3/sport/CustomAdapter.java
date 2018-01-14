@@ -56,14 +56,7 @@ public class CustomAdapter extends ArrayAdapter<CheckboxModel> {
         gson = builder.create();
         notes = new NoteJSON(new Object[]{0.0,0.0,0.0,0.0,0.0,0.0},new Object[]{0.0,0.0,0.0,0.0,0.0,0.0},new Object[]{0.0,0.0,0.0,0.0,0.0,0.0},new Object[]{0.0,0.0,0.0,0.0,0.0,0.0},new Object[]{0.0,0.0,0.0,0.0,0.0,0.0});
         //initialiser input note
-        try {
-            JSONObject reader = new JSONObject(notesDetails);
-            NoteJSON n = gson.fromJson(reader.toString(),NoteJSON.class);
-            noteTotal = n.getTotalApprendre()+n.getTotalMethode()+n.getTotalRegle()+n.getTotalApproprier()+n.getTotalMotricite();
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        noteTotal = 0;
 
     }
 
@@ -143,34 +136,21 @@ public class CustomAdapter extends ArrayAdapter<CheckboxModel> {
 
 
     }
-/*
-    private void updateViewNote(String view, View parent) {
 
-        switch (view){
-            case "motricite":
-                TextView noteMotricite = parent.findViewById(R.id.noteMotricite);
-                noteMotricite.setText(""+notes.getTotalMotricite());
+    public static double getNoteTotal() {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        try {
+            JSONObject reader = new JSONObject(notesDetails);
+            Log.d("notesDetails", notesDetails);
+            NoteJSON n = gson.fromJson(reader.toString(),NoteJSON.class);
+            noteTotal = n.getTotalApprendre()+n.getTotalMethode()+n.getTotalRegle()+n.getTotalApproprier()+n.getTotalMotricite();
+            Log.d("noteTotal", ""+noteTotal);
 
-
-                break;
-            case "methode":
-                TextView noteMethode = parent.findViewById(R.id.noteMethode);
-
-                break;
-            case "regle":
-                TextView noteRegle = parent.findViewById(R.id.noteRegle);
-                break;
-            case "apprendre":
-                TextView noteApprendre = parent.findViewById(R.id.noteApprendre);
-                break;
-            case "approprier":
-                TextView noteApproprier = parent.findViewById(R.id.noteApproprier);
-
-                break;
-
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
+        return noteTotal;
     }
-*/
 
 }
