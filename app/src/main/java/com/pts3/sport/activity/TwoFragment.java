@@ -39,6 +39,7 @@ public class TwoFragment  extends Fragment implements Step {
     private SharedPreferences.Editor editor;
     private boolean validateForm = false;
     private ListView listView;
+    private Boolean isStarted = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,10 +52,21 @@ public class TwoFragment  extends Fragment implements Step {
 
         return v;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("start", "start fragment 2");
+        isStarted = true;
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        isStarted = false;
+    }
    @Override
-    public void setMenuVisibility(final boolean visible) {
-        super.setMenuVisibility(visible);
-        if (visible) {
+    public void setUserVisibleHint(final boolean visible) {
+        super.setUserVisibleHint(visible);
+        if (visible & isStarted) {
             //On récupère le nom de la classe précédemment sélectionnée
             String classe = preferences.getString("classe", "");
             Log.d("verifyStep", classe);

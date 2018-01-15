@@ -26,6 +26,7 @@ public class StepperActivity extends AppCompatActivity implements StepperLayout.
         mStepperLayout.setAdapter(mStepperAdapter);
         mStepperLayout.setListener(this);
 
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
