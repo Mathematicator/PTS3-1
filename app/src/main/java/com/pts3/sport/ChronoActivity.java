@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -230,6 +231,7 @@ public class ChronoActivity extends AppCompatActivity {
                     Intent intent = new Intent(ChronoActivity.this, ChronoActivity2.class);
                     intent.putStringArrayListExtra(LIST_TIME_VALUE, listTemps1);
                     startActivity(intent);
+                    finish();
                 }
 
 

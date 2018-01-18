@@ -3,8 +3,10 @@ package com.pts3.sport;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +17,7 @@ public class info extends AppCompatActivity {
 
     TextView userInfo;
     AppCompatButton disconnect;
-    ImageView choisirClasse;
+    CardView choisirClasse;
     Context context=this;
 
 
@@ -28,7 +30,7 @@ public class info extends AppCompatActivity {
 
         userInfo = (TextView) findViewById(R.id.userInfo);
         disconnect = (AppCompatButton) findViewById(R.id.disconnect);
-        choisirClasse = (ImageView) findViewById(R.id.choisirClasse);
+        choisirClasse = (CardView) findViewById(R.id.choisirClasse);
 
         userInfo.setText(getIntent().getStringExtra("username"));
 
@@ -52,7 +54,8 @@ public class info extends AppCompatActivity {
             }
         });
 
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
     }
 }

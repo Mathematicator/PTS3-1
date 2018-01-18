@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity{
         Intent displayActivity = new Intent(this,info.class);
         displayActivity.putExtra("username",username.getText().toString());
         this.startActivity(displayActivity);
+        this.finish();
     }
 
 

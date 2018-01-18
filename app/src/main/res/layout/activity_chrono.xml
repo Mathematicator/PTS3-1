@@ -6,7 +6,9 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context="com.pts3.sport.ChronoActivity"
 android:orientation="vertical"
-    android:padding="30px">
+    android:padding="30px"
+    android:focusableInTouchMode="true"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"

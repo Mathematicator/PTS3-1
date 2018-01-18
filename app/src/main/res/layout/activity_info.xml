@@ -10,44 +10,50 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
+        android:background="#fff"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/logo_prof"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test"
-            android:textSize="70dp"
-            android:id="@+id/userInfo"
-            android:textColor="@color/gris"
-            android:layout_marginLeft="30dp"/>
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/logo_prof" />
+
+            <TextView
+                android:id="@+id/userInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:text="Test"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="right"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp">
+            android:gravity="right">
 
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="300dp"
-            android:layout_height="70dp"
-            android:layout_gravity="right"
-            android:background="#e04f5f"
-            android:text="Se déconnecter"
-            android:textSize="30dp"
-            android:textColor="#FFFFFF"
-            android:id="@+id/disconnect"
-            />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/disconnect"
+                android:layout_width="271dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:background="#e04f5f"
+                android:drawableLeft="@drawable/ic_power_settings_new_black_24dp"
+                android:drawableTint="#fff"
+                android:text="Se déconnecter"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"
+                android:tint="#fff" />
 
 
         </LinearLayout>
@@ -59,35 +65,60 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-
         android:layout_marginTop="30dp"
         android:orientation="vertical">
 
 
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Choisir une classe"
-            android:id="@+id/choisirClasse"
-            android:src="@drawable/logo_evaluation"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Commencer l'évaluation"
-            android:textColor="@color/gris"
-            android:textSize="50dp"/>
-
         <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:id="@+id/choisirClasse"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="2dp"
             >
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="30dp"
+                >
 
+                <!--<ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Choisir une classe"
+                    android:id="@+id/choisirClasse"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/logo_evaluation"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Commencer l'évaluation"
+                    android:textColor="@color/gris"
+                    android:textSize="50dp"/>
+-->
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
 
-            </RelativeLayout>
+                    android:src="@drawable/logo_evaluation" />
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:selectableItemBackground"
+                    android:padding="10dp"
+                    android:text="Commencer l'évaluation"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#333"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
