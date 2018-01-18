@@ -309,7 +309,7 @@ public class ChronoActivity extends AppCompatActivity {
 
 
         Note noteEleve = noteManager.recuperer(eleveANoter,sport);
-        if(noteEleve !=null ){
+        if(noteEleve != null && noteEleve.getPerformances() > 0.0f){
             return true;
         }
         return false;

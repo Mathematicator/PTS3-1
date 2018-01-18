@@ -256,6 +256,7 @@ public class ChronoActivity2 extends AppCompatActivity {
             noteManager.modifier(noteEleve);
         }
 
+
     }
     private boolean isNotay(Eleve eleveANoter){
         SportManager sportManager = new SportManager(this);
@@ -264,7 +265,7 @@ public class ChronoActivity2 extends AppCompatActivity {
 
 
         Note noteEleve = noteManager.recuperer(eleveANoter,sport);
-        if(noteEleve != null ){
+        if(noteEleve != null && noteEleve.getPerformances() > 0.0f){
             return true;
         }
         return false;
