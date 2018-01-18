@@ -64,7 +64,7 @@ public class ChronoActivity extends AppCompatActivity {
     private MenuItem testMenu;
     private MenuItem testMenu2;
     private Menu menu;
-
+    private int iterator72;
 
 
     @Override
@@ -173,8 +173,10 @@ public class ChronoActivity extends AppCompatActivity {
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!chrono.isRunning())
-                chrono.restart();
+                if(!chrono.isRunning()) {
+                    iterator = 0;
+                    chrono.restart();
+                }
             }
         });
 
@@ -188,59 +190,45 @@ public class ChronoActivity extends AppCompatActivity {
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i=0;i<=4;i++){
-                    int startL = txtAffichage.getLayout().getLineStart(i);
-                    int endL= txtAffichage.getLayout().getLineEnd(i);
-                    String getTextOnLine = (String) txtAffichage.getText().subSequence(startL,endL);
+                String lastNum="" ;
+                boolean isNotOk=false;
+                for(EditText editText : editTextList){
 
-                    int j=0;
-                    for(EditText eT : editTextList){
-
-                        if(String.valueOf(eT.getText()).equals(""+i)){
-
-                            if(compteur > 0){
-                                String[] time1 = getTextOnLine.split("-");
-                                time1[1]="00:"+time1[1];
-                                String[]  time2 = ((String) besTimeList.get(j).getText()).split("-");
-                                time2[1]="00:"+time2[1];
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
-                                try {
-                                    Date temps1 = simpleDateFormat.parse(time1[1]);
-                                    Date temps2 = simpleDateFormat.parse(time2[1]);
-                                    if( temps1.getTime() < temps2.getTime()){
-                                        besTimeList.get(j).setText(getTextOnLine);
-                                    }
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }else{
-                                besTimeList.get(j).setText(getTextOnLine);
-                            }
-
-                            textViewList.get(j).setText(getTextOnLine);
-
-
-                        }
-                        j++;
+                    String txt = editText.getText()+"";
+                    if((editText.getText()+"").equals("")){
+                        isNotOk=true;
                     }
+                    else if(  (Integer.parseInt(txt) > 4)  || (editText.getText()+"").equals(lastNum)){
+                        isNotOk=true;
 
+                    }else if(txtAffichage.getText().equals("")){
+                        isNotOk=true;
+                    }
+                    lastNum = editText.getText()+"";
                 }
-                compteur=1;
+                if(!isNotOk){
+                    if(iterator72 < 2) {
+                        validerTemps();
+                        iterator72++;
+                    }
+                }
+
+
 
             }
         });
         suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(TextView tv : besTimeList){
-                    listTemps1.add((String) tv.getText());
+                if(iterator72 == 2) {
+                    for (TextView tv : besTimeList) {
+                        listTemps1.add((String) tv.getText());
+
+                    }
+                    Intent intent = new Intent(ChronoActivity.this, ChronoActivity2.class);
+                    intent.putStringArrayListExtra(LIST_TIME_VALUE, listTemps1);
+                    startActivity(intent);
                 }
-
-                Intent intent = new Intent(ChronoActivity.this,ChronoActivity2.class);
-                intent.putStringArrayListExtra(LIST_TIME_VALUE,listTemps1);
-
-                startActivity(intent);
 
 
 
@@ -321,6 +309,47 @@ public class ChronoActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    private void validerTemps(){
+        for(int i=0;i<=4;i++){
+            int startL = txtAffichage.getLayout().getLineStart(i);
+            int endL= txtAffichage.getLayout().getLineEnd(i);
+            String getTextOnLine = (String) txtAffichage.getText().subSequence(startL,endL);
+
+            int j=0;
+            for(EditText eT : editTextList){
+
+                if(String.valueOf(eT.getText()).equals(""+i)){
+
+                    if(compteur > 0){
+                        String[] time1 = getTextOnLine.split("-");
+                        time1[1]="00:"+time1[1];
+                        String[]  time2 = ((String) besTimeList.get(j).getText()).split("-");
+                        time2[1]="00:"+time2[1];
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
+                        try {
+                            Date temps1 = simpleDateFormat.parse(time1[1]);
+                            Date temps2 = simpleDateFormat.parse(time2[1]);
+                            if( temps1.getTime() < temps2.getTime()){
+                                besTimeList.get(j).setText(getTextOnLine);
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                    }else{
+                        besTimeList.get(j).setText(getTextOnLine);
+                    }
+
+                    textViewList.get(j).setText(getTextOnLine);
+
+
+                }
+                j++;
+            }
+
+        }
+        compteur=1;
     }
 
 }

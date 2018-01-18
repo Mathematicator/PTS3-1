@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pts3.sport.activity.ThreeFragment;
 import com.pts3.sport.dao.Eleve;
@@ -45,9 +46,9 @@ public class ChronoActivity2 extends AppCompatActivity {
    private ArrayList<EditText> editTextList;
 
     private ArrayList<String> listTemps1;
-    private   TextView temps1, temps2, temps3, temps4, eleve1, eleve2, eleve3, eleve4,meilleurT1,meilleurT2,meilleurT3,meilleurT4,note1,note2,note3,note4;
-    private    EditText txtInput1, txtInput2, txtInput3, txtInput4;
-    private int  iterator2,compteur;
+    private TextView temps1, temps2, temps3, temps4, eleve1, eleve2, eleve3, eleve4,meilleurT1,meilleurT2,meilleurT3,meilleurT4,note1,note2,note3,note4;
+    private EditText txtInput1, txtInput2, txtInput3, txtInput4;
+    private int iterator2,compteur;
     private Chronometre chrono;
     private SharedPreferences preferences;
     private String classe;
@@ -55,6 +56,7 @@ public class ChronoActivity2 extends AppCompatActivity {
 
     private List<Eleve> listEleve;
     private int iterator;
+    private int iterator72;
 
 
     @Override
@@ -182,58 +184,32 @@ public class ChronoActivity2 extends AppCompatActivity {
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (int i = 0; i <= 4; i++) {
-                    int startL = txtAffichage.getLayout().getLineStart(i);
-                    int endL = txtAffichage.getLayout().getLineEnd(i);
-                    String getTextOnLine = (String) txtAffichage.getText().subSequence(startL, endL);
-                    Log.i("temps", getTextOnLine);
-                    int j = 0;
-                    for (EditText eT : editTextList) {
+                String lastNum="" ;
+                boolean isNotOk=false;
+                for(EditText editText : editTextList){
 
-                            if (String.valueOf(eT.getText()).equals("" + i)) {
-                                if (compteur > 0) {
-
-                                    Log.i("numéro", String.valueOf(eT.getText()));
-
-                                    String[] time1 = getTextOnLine.split("-");
-                                    time1[1] = "00:" + time1[1];
-                                    String[] time2 = ((String) besTimeList.get(j).getText()).split("-");
-                                    time2[1] = "00:" + time2[1];
-                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
-                                    try {
-                                        Date temps1 = simpleDateFormat.parse(time1[1]);
-                                        Date temps2 = simpleDateFormat.parse(time2[1]);
-                                        if (temps1.getTime() < temps2.getTime()) {
-                                            besTimeList.get(j).setText(getTextOnLine);
-                                        }
-
-
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-                                    double points1 = getPoint(listTemps1.get(j));
-                                    double points2 =  getPointWithDifferenceBetweenTime(listTemps1.get(j),(String) besTimeList.get(j).getText());
-                                    double points = points1+ points2;
-                                    noteTVList.get(j).setText(""+ points);
-                                     ajouterNote(j,points);
-
-
-                                } else {
-                                    besTimeList.get(j).setText(getTextOnLine);
-                                }
-                                textViewList.get(j).setText(getTextOnLine);
-
-
-                            }
-
-                        j++;
+                    String txt = editText.getText()+"";
+                    if((editText.getText()+"").equals("")){
+                        isNotOk=true;
+                        afficherToast();
                     }
+                    else if(  (Integer.parseInt(txt) > 4)  || (editText.getText()+"").equals(lastNum)){
+                        isNotOk=true;
+                        afficherToast();
 
-
-
-
+                    }else if(txtAffichage.getText().equals("")){
+                        isNotOk=true;
+                        afficherToast();
+                    }
+                    lastNum = editText.getText()+"";
                 }
-                compteur=1;
+                if(!isNotOk){
+                    if(iterator72 < 2) {
+                        validerTemps();
+                        iterator72++;
+                    }
+                }
+                
             }
         });
         suivant.setOnClickListener(new View.OnClickListener() {
@@ -256,8 +232,10 @@ public class ChronoActivity2 extends AppCompatActivity {
        restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!chrono.isRunning())
-                chrono.restart();
+                if(!chrono.isRunning()) {
+                    chrono.restart();
+                    iterator = 0;
+                }
             }
         });
 
@@ -375,4 +353,62 @@ public class ChronoActivity2 extends AppCompatActivity {
 
         return 0;
     }
+    public void validerTemps(){
+        for (int i = 0; i <= 4; i++) {
+            int startL = txtAffichage.getLayout().getLineStart(i);
+            int endL = txtAffichage.getLayout().getLineEnd(i);
+            String getTextOnLine = (String) txtAffichage.getText().subSequence(startL, endL);
+            Log.i("temps", getTextOnLine);
+            int j = 0;
+            for (EditText eT : editTextList) {
+
+                if (String.valueOf(eT.getText()).equals("" + i)) {
+                    if (compteur > 0) {
+
+                        Log.i("numéro", String.valueOf(eT.getText()));
+
+                        String[] time1 = getTextOnLine.split("-");
+                        time1[1] = "00:" + time1[1];
+                        String[] time2 = ((String) besTimeList.get(j).getText()).split("-");
+                        time2[1] = "00:" + time2[1];
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
+                        try {
+                            Date temps1 = simpleDateFormat.parse(time1[1]);
+                            Date temps2 = simpleDateFormat.parse(time2[1]);
+                            if (temps1.getTime() < temps2.getTime()) {
+                                besTimeList.get(j).setText(getTextOnLine);
+                            }
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        double points1 = getPoint(listTemps1.get(j));
+                        double points2 =  getPointWithDifferenceBetweenTime(listTemps1.get(j),(String) besTimeList.get(j).getText());
+                        double points = points1+ points2;
+                        noteTVList.get(j).setText(""+ points);
+                        ajouterNote(j,points);
+
+
+                    } else {
+                        besTimeList.get(j).setText(getTextOnLine);
+                    }
+                    textViewList.get(j).setText(getTextOnLine);
+
+
+                }
+
+                j++;
+            }
+
+
+
+
+        }
+        compteur=1;
+    }
+    public void afficherToast(){
+        Toast.makeText(getApplicationContext(),"Mauvais entrée de temps",Toast.LENGTH_SHORT).show();
+    }
+    
 }
