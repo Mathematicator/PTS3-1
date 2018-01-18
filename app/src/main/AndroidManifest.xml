@@ -31,6 +31,7 @@
         <activity android:name=".ChronoActivity" android:screenOrientation="landscape" />
         <activity android:name=".ChronoActivity2"></activity>
         <activity android:name=".activity.StepperActivity" android:screenOrientation="landscape"></activity>
+
     </application>
 
 </manifest>

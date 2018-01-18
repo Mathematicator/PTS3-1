@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pts3.sport.activity.StepperActivity;
+import com.pts3.sport.activity.ThreeFragment;
 import com.pts3.sport.dao.Eleve;
 import com.pts3.sport.database.ClasseManager;
 import com.pts3.sport.database.EleveManager;
@@ -129,13 +130,12 @@ public class ChronoActivity extends AppCompatActivity {
 
         for(Eleve eleve : listEleve){
 
-            if(!eleve.isEvalue()){
-
-
+            if(!eleve.isEvalue() && iterator2<4){
                 textViews2List.get(iterator2).setText(eleve.getNom());
                 eleve.setBoolean(true);
+                iterator2++;
             }
-            iterator2++;
+
         }
 
 
@@ -224,7 +224,7 @@ public class ChronoActivity extends AppCompatActivity {
                 }
                 for(TextView textView : textViews2List){
                     if (textView.getText().equals("")){
-                        Intent intent = new Intent(ChronoActivity.this,SelectionEleve.class);
+                        Intent intent = new Intent(ChronoActivity.this,ThreeFragment.class);
                         startActivity(intent);
                     }
                 }
@@ -259,10 +259,6 @@ public class ChronoActivity extends AppCompatActivity {
             }
         },1000,1000);
 
-    }
-    public void ouvrirAccueil(){
-        Intent displayActivity = new Intent(this,StepperActivity.class);
-        this.startActivity(displayActivity);
     }
 
 

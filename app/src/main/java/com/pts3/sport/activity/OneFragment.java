@@ -47,6 +47,7 @@ public class OneFragment extends Fragment implements Step {
         //Récupérer la liste des classe
         ClasseManager classeManager = new ClasseManager(context);
         listClasse = classeManager.recupererTout();
+
         listView.setAdapter(new ClasseListAdapter(listClasse));
 
 

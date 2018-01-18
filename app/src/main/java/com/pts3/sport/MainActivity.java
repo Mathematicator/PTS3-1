@@ -3,10 +3,12 @@ package com.pts3.sport;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
@@ -26,7 +28,9 @@ import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity{
+    private SharedPreferences preferences;
 
+    private SharedPreferences.Editor editor;
     private EditText username,password;
     private Context context;
     private Button btn;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity{
         //Définition de la view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         //synchronisé la connexion avec la base de donnée
         registerReceiver(new NetworkSyncData(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
@@ -61,6 +66,8 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(eleveManager.isLogin(username.getText().toString(), password.getText().toString())) {
                     // connexion effectué
+
+
                     ouvrirAccueil();
                 }
                 else {

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.pts3.sport.activity.ThreeFragment;
 import com.pts3.sport.dao.Eleve;
 import com.pts3.sport.database.ClasseManager;
 import com.pts3.sport.database.EleveManager;
@@ -123,13 +124,14 @@ public class ChronoActivity2 extends AppCompatActivity {
 
         for (Eleve eleve : listEleve) {
 
-            if (!eleve.isEvalue()) {
+            if (!eleve.isEvalue() && iterator2 <4) {
 
 
                 textViews2List.get(iterator2 % 4).setText(eleve.getNom());
                 eleve.setBoolean(true);
+                iterator2++;
             }
-            iterator2++;
+
         }
 
 
@@ -219,7 +221,6 @@ public class ChronoActivity2 extends AppCompatActivity {
                 for(Eleve eleve : listEleve) {
                     if(!eleve.isEvalue()) {
                         Intent intent = new Intent(ChronoActivity2.this, ChronoActivity.class);
-
                         startActivity(intent);
                     }
                 }
