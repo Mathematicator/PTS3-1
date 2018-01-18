@@ -129,7 +129,7 @@ public class ChronoActivity extends AppCompatActivity {
 
         for(Eleve eleve : listEleve){
 
-            if(!eleve.isEvalue()){
+            if(!eleve.isEvalue() && iterator2<4){
 
 
                 textViews2List.get(iterator2).setText(eleve.getNom());
