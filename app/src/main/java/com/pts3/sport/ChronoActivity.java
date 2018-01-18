@@ -21,8 +21,12 @@ import android.widget.TextView;
 import com.pts3.sport.activity.StepperActivity;
 import com.pts3.sport.activity.ThreeFragment;
 import com.pts3.sport.dao.Eleve;
+import com.pts3.sport.dao.Note;
+import com.pts3.sport.dao.Sport;
 import com.pts3.sport.database.ClasseManager;
 import com.pts3.sport.database.EleveManager;
+import com.pts3.sport.database.NoteManager;
+import com.pts3.sport.database.SportManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,6 +66,7 @@ public class ChronoActivity extends AppCompatActivity {
     private Menu menu;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +86,7 @@ public class ChronoActivity extends AppCompatActivity {
 
         chrono = new Chronometre(this, new Handler(),txtAffichage,txtValue);
          btnRestart = findViewById(R.id.btnRestart);
+
         besTimeList = new ArrayList<>();
         textViewList = new ArrayList<>();
         editTextList = new ArrayList<>();
@@ -130,8 +136,9 @@ public class ChronoActivity extends AppCompatActivity {
         // Comparaison dans le if à changer savoir si la note est déjà la ou pas
         for(Eleve eleve : listEleve){
 
-            if(!eleve.isEvalue() && iterator2<4){
+            if(!isNotay(eleve) && iterator2<4){
                 textViews2List.get(iterator2).setText(eleve.getNom());
+
                 eleve.setBoolean(true);
                 iterator2++;
             }
@@ -299,6 +306,18 @@ public class ChronoActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+    private boolean isNotay(Eleve eleveANoter){
+        SportManager sportManager = new SportManager(this);
+        Sport sport = sportManager.recuperer(preferences.getString("sport", ""));
+        NoteManager noteManager = new NoteManager(this);
+
+
+        Note noteEleve = noteManager.recuperer(eleveANoter,sport);
+        if(noteEleve !=null ){
+            return true;
+        }
+        return false;
     }
 
 }

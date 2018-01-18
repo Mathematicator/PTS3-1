@@ -37,6 +37,7 @@ public class ChronoActivity2 extends AppCompatActivity {
     private static final String ITERATOR_VALUE = "a";
     public TextView txtValue;
     public  TextView txtAffichage;
+    private ArrayList idEleveList;
     public Button start, lap, stop, valider, suivant,restart;
 
 
@@ -97,7 +98,7 @@ public class ChronoActivity2 extends AppCompatActivity {
         noteTVList.add(note2);
         noteTVList.add(note3);
         noteTVList.add(note4);
-
+        idEleveList = new ArrayList<>();
         txtInput1 = findViewById(R.id.txtInput);
         txtInput2 = findViewById(R.id.txtInput2);
         txtInput3 = findViewById(R.id.txtInput3);
@@ -133,11 +134,11 @@ public class ChronoActivity2 extends AppCompatActivity {
 
         for (Eleve eleve : listEleve) {
 
-            if (!eleve.isEvalue() && iterator2 <4) {
+            if (!isNotay(eleve) && iterator2 <4) {
 
-
+                idEleveList.add(eleve.getId_eleve());
                 textViews2List.get(iterator2 % 4).setText(eleve.getNom());
-                eleve.setBoolean(true);
+
                 iterator2++;
             }
 
@@ -210,7 +211,7 @@ public class ChronoActivity2 extends AppCompatActivity {
                                     double points2 =  getPointWithDifferenceBetweenTime(listTemps1.get(j),(String) besTimeList.get(j).getText());
                                     double points = points1+ points2;
                                     noteTVList.get(j).setText(""+ points);
-                                   // ajouterNote(eleve,);
+                                     ajouterNote(j,points);
 
 
                                 } else {
@@ -258,16 +259,31 @@ public class ChronoActivity2 extends AppCompatActivity {
 
     }
 
-    private void ajouterNote(Eleve eleve,double note) {
+    private void ajouterNote(int j, double note) {
         SportManager sportManager = new SportManager(this);
         Sport sport = sportManager.recuperer(preferences.getString("sport", ""));
         NoteManager noteManager = new NoteManager(this);
-        Note noteEleve = noteManager.recuperer(eleve,sport);
-        if(noteEleve !=null ){
+        int i = (int) idEleveList.get(j);
+        Log.i("Indice",i+"");
+        Eleve eleveANoter = new EleveManager(this).recuperer(i);
+        Note noteEleve = noteManager.recuperer(eleveANoter,sport);
+        if(noteEleve != null ){
             noteEleve.setPerformances((float) note);
             noteManager.modifier(noteEleve);
         }
 
+    }
+    private boolean isNotay(Eleve eleveANoter){
+        SportManager sportManager = new SportManager(this);
+        Sport sport = sportManager.recuperer(preferences.getString("sport", ""));
+        NoteManager noteManager = new NoteManager(this);
+
+
+        Note noteEleve = noteManager.recuperer(eleveANoter,sport);
+        if(noteEleve != null ){
+           return true;
+        }
+        return false;
     }
 
     private double getPointWithDifferenceBetweenTime(String s, String s1) {
