@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
@@ -264,6 +265,13 @@ public class EvalActivity extends AppCompatActivity {
                 Toast toast;
                 toast = Toast.makeText(context, "Note sauvegardée !", Toast.LENGTH_SHORT);
                 toast.show();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        EvalActivity.this.finish();
+                    }
+                }, 2000);
             }
         });
         //arrayAdapter.notifyDataSetChanged();

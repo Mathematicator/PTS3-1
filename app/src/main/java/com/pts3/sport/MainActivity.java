@@ -8,7 +8,8 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
+
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
@@ -106,6 +107,11 @@ public class MainActivity extends AppCompatActivity{
 
             }
         },1000,1000);
+
+        //disactivate check
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
     }
 

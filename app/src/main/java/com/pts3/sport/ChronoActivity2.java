@@ -134,7 +134,11 @@ public class ChronoActivity2 extends AppCompatActivity {
 
         for (Eleve eleve : listEleve) {
 
+
             if (!isNotay(eleve) && iterator2 <4) {
+
+
+
 
                 idEleveList.add(eleve.getId_eleve());
                 textViews2List.get(iterator2 % 4).setText(eleve.getNom());
