@@ -28,5 +28,19 @@ public class ProfesseurManager extends Manager {
         }
 
     }
+    public int getId(String username, String password){
+
+        Cursor c =  db.rawQuery("SELECT * FROM professeur WHERE nom_prof='"+username+"' and mdp_prof='"+password+"'", null);
+
+        if(c.moveToFirst()) {
+            Log.i("ID PROF ",(String) ""+c.getInt(0));
+            return c.getInt(c.getColumnIndex("id_prof"));
+
+        }
+        else {
+            return 0;
+        }
+
+    }
 
 }

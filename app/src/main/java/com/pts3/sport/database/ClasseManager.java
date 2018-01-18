@@ -42,5 +42,19 @@ public class ClasseManager extends Manager {
         c.close();
         return classes;
     }
+    public ArrayList<Classe> recupererTout(int idprof) {
+        ArrayList<Classe> classes = new ArrayList<Classe>();
+        Cursor c =  db.rawQuery("SELECT * FROM CLASSE WHERE id_prof='"+idprof+"'", null);
+        if (c.moveToFirst()) {
+            do {
+                Classe classe = new Classe(c.getInt(c.getColumnIndex("id_classe")),c.getString(c.getColumnIndex("nom_classe")),c.getInt(c.getColumnIndex("niveau_classe")),c.getInt(c.getColumnIndex("id_prof")));
+                classes.add(classe);
+
+            }
+            while (c.moveToNext());
+        }
+        c.close();
+        return classes;
+    }
 
 }
