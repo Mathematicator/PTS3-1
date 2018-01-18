@@ -35,13 +35,14 @@ android:orientation="vertical">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Meilleur temps" />
+            android:text="Temps à faire correspondre à l'élève"
+            />
 
         <TextView
             android:id="@+id/tempsCores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Temps à faire correspondre à l'élève"
+            android:text="Meilleur temps"
             android:layout_weight="1"
             />
     </TableRow>
@@ -200,7 +201,7 @@ android:orientation="vertical">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.33"
-        android:text="start"
+        android:text="Démarrer"
         />
 
     <Button
@@ -209,7 +210,7 @@ android:orientation="vertical">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.33"
-        android:text="lap"
+        android:text="Passage d'un elève"
         />
 </LinearLayout>
 <LinearLayout
@@ -231,7 +232,7 @@ android:orientation="vertical">
         android:id="@+id/btnStop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="stop"
+        android:text="Arreter"
         android:layout_weight="0.33"
         />
     <Button
@@ -240,7 +241,7 @@ android:orientation="vertical">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.33"
-        android:text="suivant"
+        android:text="Suivant"
         />
     <Button
         android:layout_marginTop="25dp"
@@ -248,7 +249,7 @@ android:orientation="vertical">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.33"
-        android:text="restart"
+        android:text="REDEMARRER"
         />
 
 

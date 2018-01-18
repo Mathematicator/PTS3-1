@@ -6,18 +6,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.pts3.sport.activity.ThreeFragment;
 import com.pts3.sport.dao.Eleve;
+import com.pts3.sport.dao.Note;
+import com.pts3.sport.dao.Sport;
 import com.pts3.sport.database.ClasseManager;
 import com.pts3.sport.database.EleveManager;
+import com.pts3.sport.database.NoteManager;
+import com.pts3.sport.database.SportManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,9 +35,10 @@ import java.util.Locale;
 public class ChronoActivity2 extends AppCompatActivity {
     private static final String LIST_TIME_VALUE ="c" ;
     private static final String ITERATOR_VALUE = "a";
-    public static TextView txtValue;
-    public static TextView txtAffichage;
-    public Button start, lap, stop, valider, suivant;
+    public TextView txtValue;
+    public  TextView txtAffichage;
+    public Button start, lap, stop, valider, suivant,restart;
+
 
     private ArrayList<TextView> textViewList, textViews2List,besTimeList,noteTVList;
    private ArrayList<EditText> editTextList;
@@ -39,13 +46,14 @@ public class ChronoActivity2 extends AppCompatActivity {
     private ArrayList<String> listTemps1;
     private   TextView temps1, temps2, temps3, temps4, eleve1, eleve2, eleve3, eleve4,meilleurT1,meilleurT2,meilleurT3,meilleurT4,note1,note2,note3,note4;
     private    EditText txtInput1, txtInput2, txtInput3, txtInput4;
-    private int iterator, iterator2,compteur;
-    private Chronometre2 chrono2;
+    private int  iterator2,compteur;
+    private Chronometre chrono;
     private SharedPreferences preferences;
     private String classe;
 
 
     private List<Eleve> listEleve;
+    private int iterator;
 
 
     @Override
@@ -63,9 +71,10 @@ public class ChronoActivity2 extends AppCompatActivity {
         lap =  findViewById(R.id.buttonLap);
         stop =  findViewById(R.id.btnStop);
         valider =  findViewById(R.id.btnValider);
+        restart = findViewById(R.id.btnRestart);
         Intent intent = getIntent();
 
-        chrono2 = new Chronometre2(this, new Handler());
+        chrono = new Chronometre(this, new Handler(),txtAffichage,txtValue);
         listTemps1 = new ArrayList<>();
         listTemps1 = intent.getStringArrayListExtra(LIST_TIME_VALUE);
         besTimeList = new ArrayList<>();
@@ -110,14 +119,14 @@ public class ChronoActivity2 extends AppCompatActivity {
         textViews2List.add(eleve2);
         textViews2List.add(eleve3);
         textViews2List.add(eleve4);
-        Log.i("iterateur", "" + iterator);
+
 
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         classe = preferences.getString("classe", "");
 
 
-        EleveManager eleveManager = new EleveManager(this);
+        final EleveManager eleveManager = new EleveManager(this);
         ClasseManager classeManager = new ClasseManager(this);
         listEleve = eleveManager.recupererTout(classeManager.recuperer(classe));
 
@@ -138,7 +147,7 @@ public class ChronoActivity2 extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chrono2.start();
+                chrono.start();
 
 
             }
@@ -148,16 +157,20 @@ public class ChronoActivity2 extends AppCompatActivity {
         lap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chrono2.affTemps();
+                if ( chrono.isRunning && iterator < 4) {
 
-
+                    chrono.affTemps();
+                    iterator++;
+                }
             }
+
+            
         });
 
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chrono2.stop();
+                chrono.stop();
             }
         });
 
@@ -197,6 +210,9 @@ public class ChronoActivity2 extends AppCompatActivity {
                                     double points2 =  getPointWithDifferenceBetweenTime(listTemps1.get(j),(String) besTimeList.get(j).getText());
                                     double points = points1+ points2;
                                     noteTVList.get(j).setText(""+ points);
+                                   // ajouterNote(eleve,);
+
+
                                 } else {
                                     besTimeList.get(j).setText(getTextOnLine);
                                 }
@@ -218,18 +234,39 @@ public class ChronoActivity2 extends AppCompatActivity {
         suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(Eleve eleve : listEleve) {
+               /* for(Eleve eleve : listEleve) {
                     if(!eleve.isEvalue()) {
                         Intent intent = new Intent(ChronoActivity2.this, ChronoActivity.class);
                         startActivity(intent);
-                    }
-                }
-                Intent intent = new Intent(ChronoActivity2.this, SelectionEleve.class);
 
+                    }
+                } */
+                Intent intent = new Intent(ChronoActivity2.this, ChronoActivity.class);
                 startActivity(intent);
+
+
 
             }
         });
+       restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!chrono.isRunning())
+                chrono.restart();
+            }
+        });
+
+    }
+
+    private void ajouterNote(Eleve eleve,double note) {
+        SportManager sportManager = new SportManager(this);
+        Sport sport = sportManager.recuperer(preferences.getString("sport", ""));
+        NoteManager noteManager = new NoteManager(this);
+        Note noteEleve = noteManager.recuperer(eleve,sport);
+        if(noteEleve !=null ){
+            noteEleve.setPerformances((float) note);
+            noteManager.modifier(noteEleve);
+        }
 
     }
 

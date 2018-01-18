@@ -35,18 +35,18 @@ import java.util.TimerTask;
 
 public class ChronoActivity extends AppCompatActivity {
 
-    private static final String ITERATOR_VALUE = "a";
+
 
     private static final String LIST_TIME_VALUE ="c" ;
     //Attributs static à changer
-    public static TextView txtValue;
-    public static TextView txtAffichage;
+    public  TextView txtValue;
+    public  TextView txtAffichage;
     public Button start, lap, stop, valider,suivant,btnRestart;
     private ArrayList<String> listTemps1;
     private ArrayList<TextView> textViewList,textViews2List;
     private ArrayList<EditText> editTextList;
 
-    private SharedPreferences.Editor editor;
+
     TextView temps1,temps2,temps3,temps4,eleve1,eleve2,eleve3,eleve4,meilleurT1,meilleurT2,meilleurT3,meilleurT4;
     EditText txtInput1,txtInput2,txtInput3,txtInput4;
     private int iterator,iterator2,compteur=0;
@@ -78,8 +78,8 @@ public class ChronoActivity extends AppCompatActivity {
         stop = findViewById(R.id.btnStop);
         valider = findViewById(R.id.btnValider);
         Intent intent=getIntent();
-        iterator = intent.getIntExtra(ITERATOR_VALUE,0);
-        chrono = new Chronometre(this, new Handler());
+
+        chrono = new Chronometre(this, new Handler(),txtAffichage,txtValue);
          btnRestart = findViewById(R.id.btnRestart);
         besTimeList = new ArrayList<>();
         textViewList = new ArrayList<>();
@@ -127,7 +127,7 @@ public class ChronoActivity extends AppCompatActivity {
         ClasseManager classeManager = new ClasseManager(this);
         listEleve = eleveManager.recupererTout(classeManager.recuperer(classe));
 
-
+        // Comparaison dans le if à changer savoir si la note est déjà la ou pas
         for(Eleve eleve : listEleve){
 
             if(!eleve.isEvalue() && iterator2<4){
@@ -152,14 +152,18 @@ public class ChronoActivity extends AppCompatActivity {
         lap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chrono.affTemps();
-                //associer un numero
+                if(chrono.isRunning && iterator <4) {
+                    chrono.affTemps();
+                    iterator++;
+                }
+
 
             }
         });
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!chrono.isRunning())
                 chrono.restart();
             }
         });
@@ -222,12 +226,7 @@ public class ChronoActivity extends AppCompatActivity {
                 for(TextView tv : besTimeList){
                     listTemps1.add((String) tv.getText());
                 }
-                for(TextView textView : textViews2List){
-                    if (textView.getText().equals("")){
-                        Intent intent = new Intent(ChronoActivity.this,ThreeFragment.class);
-                        startActivity(intent);
-                    }
-                }
+
                 Intent intent = new Intent(ChronoActivity.this,ChronoActivity2.class);
                 intent.putStringArrayListExtra(LIST_TIME_VALUE,listTemps1);
 
