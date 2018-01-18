@@ -1,6 +1,7 @@
 package com.pts3.sport.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,6 +23,7 @@ import com.stepstone.stepper.VerificationError;
 
 import java.util.ArrayList;
 
+import static android.content.Intent.getIntent;
 import static com.pts3.sport.activity.StepperActivity.mStepperLayout;
 
 /**
@@ -42,15 +44,18 @@ public class OneFragment extends Fragment implements Step {
         ListView listView = (ListView)v.findViewById(R.id.listViewer);
         context = this.getContext();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        editor = preferences.edit();
+
+
+
 
         //Récupérer la liste des classe
+       int id = preferences.getInt("idprof",1);
         ClasseManager classeManager = new ClasseManager(context);
-        listClasse = classeManager.recupererTout();
+        listClasse = classeManager.recupererTout(id);
 
         listView.setAdapter(new ClasseListAdapter(listClasse));
 
-
+        editor = preferences.edit();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
