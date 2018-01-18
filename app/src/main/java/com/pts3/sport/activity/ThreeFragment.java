@@ -56,7 +56,6 @@ public class ThreeFragment extends Fragment implements Step {
     private ListView listView;
     private boolean validateForm = false;
     private ArrayList<Etudiant> etudiants;
-    private Boolean isStarted = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,21 +79,10 @@ public class ThreeFragment extends Fragment implements Step {
         return v;
     }
     @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("start", "start fragment 3");
-        isStarted = true;
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        isStarted = false;
-    }
-    @Override
     public void setUserVisibleHint(final boolean visible) {
-        //Log.d("menuVisible", "menu");
         super.setUserVisibleHint(visible);
-        if (visible && isStarted) {
+        if (visible && !preferences.getString("sport", "").isEmpty()) {
+            Log.d("fragment3", " is visible");
             insertData();
             listView.setAdapter(new EtudiantAdapter(etudiants));
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

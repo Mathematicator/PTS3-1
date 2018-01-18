@@ -232,7 +232,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="start"
+            android:text="Démarrer"
             />
 
         <Button
@@ -241,7 +241,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="lap"
+            android:text="Passage d'un eleve"
             />
     </LinearLayout>
     <LinearLayout
@@ -263,7 +263,7 @@
             android:id="@+id/btnStop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="stop"
+            android:text="Arreter"
             android:layout_weight="1"
             />
 
@@ -273,7 +273,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="suivant" />
+            android:text="Suivant" />
+        <Button
+            android:layout_marginTop="25dp"
+            android:id="@+id/btnRestart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:text="Redemarrer"
+            />
 
 
     </LinearLayout>
