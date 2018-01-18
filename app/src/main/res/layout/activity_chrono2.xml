@@ -5,17 +5,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.pts3.sport.ChronoActivity2"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="30px"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        >
 
+        <TextView
+            android:id="@+id/txtValue2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_weight="0.5"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical"
+            >
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:background="#27ae60"
+                android:textColor="#fff"
+                android:layout_height="wrap_content"
+                android:text="Démarrer"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
+                <Button
+                    android:id="@+id/btnStop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#e74c3c"
+                    android:textColor="#fff"
+                    android:layout_weight="0.5"
+                    android:text="Arreter"
+                    />
+                <Button
+                    android:id="@+id/btnRestart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="#F5F5F5"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#000"
+                    android:text="REDEMARRER"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        >
 
 
         <TableRow
             android:id="@+id/numero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="20px"
+            android:background="#3498db"
             >
             <TextView
                 android:id="@+id/nomEleve"
@@ -23,6 +90,8 @@
                 android:layout_height="wrap_content"
                 android:text="Nom de l'élève"
                 android:layout_weight="1"
+                android:textColor="#fff"
+                android:textAlignment="center"
                 />
 
             <TextView
@@ -30,13 +99,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Temps de l'élève" />
+                android:text="Temps de l'élève"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                />
             <TextView
                 android:id="@+id/tempsCores"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Associatio"
+                android:text="Association"
                 android:layout_weight="1"
+                android:textColor="#fff"
+                android:textAlignment="center"
 
                 />
             <TextView
@@ -44,13 +118,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Meilleur temps" />
+                android:text="Meilleur temps"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                />
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Note" />
+                android:text="Note"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                />
 
         </TableRow>
 
@@ -65,12 +145,20 @@
                 android:layout_width="match_parent"
                 android:text="ELeve_1"
                 android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/temps1"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
 
             <EditText
@@ -80,18 +168,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 />
             <TextView
                 android:id="@+id/meilleurTemps1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
             <TextView
                 android:id="@+id/note1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
 
         </TableRow>
@@ -107,12 +204,20 @@
                 android:layout_width="match_parent"
                 android:text="Eleve_2"
                 android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/temps2"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
 
             <EditText
@@ -128,12 +233,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
             <TextView
                 android:id="@+id/note2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
         </TableRow>
 
@@ -148,12 +261,20 @@
                 android:layout_width="match_parent"
                 android:text="Eleve_3"
                 android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/temps3"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
 
             <EditText
@@ -169,18 +290,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
             <TextView
                 android:id="@+id/note3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
         </TableRow>
         <TableRow
             android:id="@+id/table5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
             >
 
             <TextView
@@ -188,12 +318,20 @@
                 android:layout_width="match_parent"
                 android:text="Eleve_4"
                 android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/temps4"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
 
             <EditText
@@ -209,12 +347,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
             <TextView
                 android:id="@+id/note4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="-- -- --"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="17sp"
                 />
         </TableRow>
 
@@ -226,62 +372,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:layout_marginTop="25dp"
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Démarrer"
-            />
 
         <Button
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:id="@+id/buttonLap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Passage d'un eleve"
+            android:background="#34495e"
+            android:text="Passage d'un elève"
+            android:textColor="#fff"
             />
     </LinearLayout>
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
         <Button
-            android:layout_marginTop="25dp"
             android:id="@+id/btnValider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Valider"
+            android:background="#F5F5F5"
             android:layout_weight="1"
             />
 
         <Button
-            android:layout_marginTop="25dp"
-            android:id="@+id/btnStop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Arreter"
-            android:layout_weight="1"
-            />
-
-        <Button
-            android:layout_marginTop="25dp"
             android:id="@+id/btnSuivant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Suivant" />
-        <Button
-            android:layout_marginTop="25dp"
-            android:id="@+id/btnRestart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:text="Redemarrer"
+            android:layout_marginLeft="5dp"
+            android:text="Suivant"
+            android:background="#F5F5F5"
             />
+
 
 
     </LinearLayout>
@@ -290,16 +418,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="#fff"
+        android:layout_marginTop="5dp"
+
         >
-        <TextView
-            android:id="@+id/txtValue2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+
         <TextView
             android:id="@+id/txtAffi2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
             />
 
 

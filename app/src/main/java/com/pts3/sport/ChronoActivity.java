@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -116,7 +117,8 @@ public class ChronoActivity extends AppCompatActivity {
         besTimeList.add(meilleurT4);
         Log.i("iterateur",""+iterator);
 
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         classe = preferences.getString("classe", "");
@@ -183,7 +185,7 @@ public class ChronoActivity extends AppCompatActivity {
                     int startL = txtAffichage.getLayout().getLineStart(i);
                     int endL= txtAffichage.getLayout().getLineEnd(i);
                     String getTextOnLine = (String) txtAffichage.getText().subSequence(startL,endL);
-
+                    Log.d("temps", getTextOnLine);
                     int j=0;
                     for(EditText eT : editTextList){
 
@@ -191,8 +193,10 @@ public class ChronoActivity extends AppCompatActivity {
 
                             if(compteur > 0){
                                 String[] time1 = getTextOnLine.split("-");
+                                Log.d("temps", time1[1]);
                                 time1[1]="00:"+time1[1];
                                 String[]  time2 = ((String) besTimeList.get(j).getText()).split("-");
+                                Log.d("temps",(String)besTimeList.get(j).getText());
                                 time2[1]="00:"+time2[1];
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss:SSS", Locale.FRENCH);
                                 try {

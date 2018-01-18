@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -120,7 +121,8 @@ public class ChronoActivity2 extends AppCompatActivity {
         textViews2List.add(eleve3);
         textViews2List.add(eleve4);
 
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         classe = preferences.getString("classe", "");
@@ -180,7 +182,7 @@ public class ChronoActivity2 extends AppCompatActivity {
                     int startL = txtAffichage.getLayout().getLineStart(i);
                     int endL = txtAffichage.getLayout().getLineEnd(i);
                     String getTextOnLine = (String) txtAffichage.getText().subSequence(startL, endL);
-                    Log.i("temps", getTextOnLine);
+                    Log.d("temps", getTextOnLine);
                     int j = 0;
                     for (EditText eT : editTextList) {
 
@@ -190,6 +192,7 @@ public class ChronoActivity2 extends AppCompatActivity {
                                     Log.i("numéro", String.valueOf(eT.getText()));
 
                                     String[] time1 = getTextOnLine.split("-");
+
                                     time1[1] = "00:" + time1[1];
                                     String[] time2 = ((String) besTimeList.get(j).getText()).split("-");
                                     time2[1] = "00:" + time2[1];
