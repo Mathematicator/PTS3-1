@@ -23,15 +23,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name=".ChoixActivity" android:screenOrientation="landscape" />
-        <activity android:name=".SportActivity" android:screenOrientation="landscape" />
-        <activity android:name=".TypeEval" android:screenOrientation="landscape"/>
-        <activity android:name=".SelectionEleve" android:screenOrientation="landscape"/>
-        <activity android:name=".EvalActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".ChronoActivity" android:screenOrientation="landscape" />
-        <activity android:name=".ChronoActivity2"></activity>
-        <activity android:name=".activity.StepperActivity" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ChoixActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".SportActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".TypeEval"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".SelectionEleve"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".EvalActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ChronoActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ChronoActivity2" />
+        <activity
+            android:name=".activity.StepperActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".info"
+            android:screenOrientation="landscape">
 
+        </activity>
     </application>
 
 </manifest>

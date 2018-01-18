@@ -10,7 +10,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.pts3.sport.activity.StepperActivity;
 import com.pts3.sport.database.ProfesseurManager;
 import com.pts3.sport.network.NetworkSyncData;
 
@@ -46,7 +44,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = preferences.edit();
         //synchronisé la connexion avec la base de donnée
         registerReceiver(new NetworkSyncData(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(eleveManager.isLogin(username.getText().toString(), password.getText().toString())) {
                     // connexion effectué
-
 
                     ouvrirAccueil();
                 }
@@ -110,7 +108,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void ouvrirAccueil(){
-        Intent displayActivity = new Intent(this,StepperActivity.class);
+        Intent displayActivity = new Intent(this,info.class);
+        displayActivity.putExtra("username",username.getText().toString());
         this.startActivity(displayActivity);
     }
 
