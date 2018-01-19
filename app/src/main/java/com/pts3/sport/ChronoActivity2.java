@@ -224,8 +224,9 @@ public class ChronoActivity2 extends AppCompatActivity {
 
                     }
                 } */
-                Intent intent = new Intent(ChronoActivity2.this, ChronoActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(ChronoActivity2.this, ChronoActivity.class);
+                startActivity(intent);*/
+                finish();
 
 
 
